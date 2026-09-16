@@ -1,0 +1,19 @@
+.root { display: grid; gap: 1.5rem; min-width: 0; max-width: 100%; overflow-y: auto; }
+.root header, .root section { min-width: 0; }
+.root p { line-height: 1.6; overflow-wrap: anywhere; }
+.controls { border: 1px solid currentColor; border-radius: 12px; padding: 1rem; min-width: 0; display: grid; gap: 1rem; }
+.controls legend { padding: 0 .5rem; font-weight: 600; }
+.controls label { display: grid; gap: .4rem; min-width: 0; }
+.controls input:not([type=checkbox]), .controls select, .controls textarea { width: 100%; box-sizing: border-box; min-width: 0; padding: .65rem; font: inherit; }
+.controls textarea { resize: vertical; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 1rem; }
+.controls .check { display: flex; align-items: flex-start; gap: .6rem; }
+.check input { margin-top: .2rem; flex: 0 0 auto; }
+.actions { display: flex; gap: .7rem; flex-wrap: wrap; }
+.result { border: 1px solid currentColor; border-radius: 12px; padding: 1rem; margin-bottom: 1rem; }
+.tableWrap { max-width: 100%; overflow-x: auto; }
+.tableWrap table { border-collapse: collapse; width: 100%; min-width: 620px; }
+.tableWrap th, .tableWrap td { text-align: left; padding: .75rem; border-bottom: 1px solid currentColor; vertical-align: top; }
+.tableWrap small { display: block; }
+.root details summary { cursor: pointer; padding: .5rem 0; }
+@media (max-width: 650px) { .root { overflow-y: visible; } .actions > button { width: 100%; } }
