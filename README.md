@@ -47,6 +47,8 @@ Search by name, filter by collection or category, or show only A/B comparisons. 
 
 The catalog includes practical use cases, games, dilemmas, and model challenges. Puzzle reference notes are teaching aids; subjective judgments have no universal answer key. A single run or A/B difference is not an accuracy or fairness benchmark.
 
+**PLC logic example:** import [`examples/plc-conveyor.json`](examples/plc-conveyor.json) to try **Jev as a PLC: conveyor interlock scan**. It tests run/fault latches, Start/Reset edges, stop priority, interlocks, and timer boundaries with a checked A/B answer key. This is a simulation-only portable example, not a built-in catalog entry or a hardware controller. See the [PLC example guide](docs/plc-example.md) for the program, expected results, and offline checks.
+
 ### Conversation lab
 
 Paste Discord messages with names and timestamps, `Name: message` text, or plain text. Auto-detection preserves multiline messages; **Parsed messages** lets you inspect the result or override the format.
