@@ -39,6 +39,7 @@ const pages = [
     detail: "From source to structured data",
   },
   { href: "/memes", label: "Meme lab", icon: Laugh, detail: "Read the room" },
+  { href: "/router", label: "LLM router", icon: GitBranch, detail: "Route with benchmark evidence" },
 ];
 export function Shell({ children }: { children: React.ReactNode }) {
   const path = usePathname();
