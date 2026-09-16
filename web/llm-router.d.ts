@@ -1,0 +1,27 @@
+export type Task = "general" | "scientific_code" | "expert_reasoning" | "long_context" | "terminal" | "automation" | "vision" | "coding_agent" | "repository_patch" | "creative";
+export type Request = {
+  task: Task; mode: "quality" | "economy" | "preference_demo";
+  inputTokens: number; outputTokens: number; budgetUsd: number; minScore: number;
+  needsImages: boolean; privacy: "cloud_allowed" | "local_only"; allowArchived: boolean;
+  excluded: string[]; preference: number; threshold: number;
+};
+export type Model = { id: string; name: string; source: string; inputUsdPerMillion: number;
+  outputUsdPerMillion: number; demoContextLimit: number; images: boolean | null;
+  scores: Partial<Record<Task, number>>; agent: string | null };
+export type Metric = { label: string; unit: string; url: string; harness: string };
+export type Candidate = { model: Model; score: number; estimatedUsd: number; harness: string | null };
+export type Result = { status: string; selected: Candidate | null; fallback: Candidate | null;
+  ranked: Candidate[]; excluded: { id: string; name: string; reasons: string[] }[];
+  snapshotDate: string; metric: Metric | null; request: Request; reason: string; warnings: string[] };
+export const snapshotDate: string;
+export const paper: string;
+export const tasks: Task[];
+export const metrics: Record<Task, Metric | null>;
+export const models: readonly Model[];
+export const defaults: Readonly<Request>;
+export function validate(request: Partial<Request>): Request;
+export function cost(model: Model, request: Pick<Request, "inputTokens" | "outputTokens">): number;
+export function route(request: Partial<Request>, now?: Date | string | number): Result;
+export function classificationPayload(prompt: string, privacy?: Request["privacy"]): unknown;
+export function parseClassification(response: unknown): Task;
+export function portableExample(): unknown;
