@@ -24,3 +24,6 @@ next-env.d.ts
 
 playwright-report/
 test-results/
+
+# Reproducible PLC challenge pack; generate with npm run plc:generate.
+/examples/plc-conveyor-advanced.json
