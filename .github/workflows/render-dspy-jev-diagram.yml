@@ -29,6 +29,7 @@ jobs:
       - name: Render Mermaid SVG
         run: |
           npx -y -p @mermaid-js/mermaid-cli@11.17.0 mmdc \
+            -p examples/dspy-jev-optimizer/puppeteer-config.json \
             -i examples/dspy-jev-optimizer/architecture.mmd \
             -o examples/dspy-jev-optimizer/architecture.svg \
             -b '#0B1020'
@@ -36,6 +37,7 @@ jobs:
       - name: Render high-resolution Mermaid PNG
         run: |
           npx -y -p @mermaid-js/mermaid-cli@11.17.0 mmdc \
+            -p examples/dspy-jev-optimizer/puppeteer-config.json \
             -i examples/dspy-jev-optimizer/architecture.mmd \
             -o examples/dspy-jev-optimizer/architecture-hd.png \
             -b '#0B1020' \
