@@ -4,7 +4,7 @@ A community playground for **TypeSafe AI's Jev**: edit classification experiment
 
 **Small experiments. Clear decisions.** This is an independent community project, not an official TypeSafe AI product, production agent harness, or claim that a typed answer is correct.
 
-**Shout-out to [@nickthompson480](https://github.com/nickthompson480) for the [original TypeSafe AI playground](https://github.com/nickthompson480/typesafe-ai-playground).** This community extension builds on that project's example library and Python foundation with a Next.js interface and interactive prototypes. The original credit and [MIT license](LICENSE) are retained.
+**Shout-out to [@nickthompson480](https://github.com/nickthompson480) for the [original TypeSafe AI playground (examples only)](https://github.com/nickthompson480/typesafe-ai-playground).** This community extension builds on that project's example library and Python foundation with a Next.js interface and interactive prototypes. The original credit and [MIT license](LICENSE) are retained.
 
 [Open the live playground](https://typesafe-ai-playground.vercel.app) · [TypeSafe API documentation](https://docs.typesafe.ai/introduction/quickstart) · [Contributing](CONTRIBUTING.md) · [Agent guide](AGENTS.md)
 
