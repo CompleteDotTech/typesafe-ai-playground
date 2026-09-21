@@ -142,8 +142,8 @@ export function CleanRoomLab() {
             {busy ? "Rebuilding…" : "Run local demo"}
           </button>
           <p className="cr-note">
-            Run from localhost with Chromium installed. For a custom target or
-            live Jev, use <code>pnpm clean-room</code>. Instructions are in{" "}
+            Needs Chromium on the server running this app. For a custom target
+            or live Jev, use <code>pnpm clean-room</code>. Instructions are in{" "}
             <code>docs/clean-room/README.md</code>.
           </p>
         </div>

@@ -107,10 +107,16 @@ The Jev input default matches the playground's existing input-only estimate. Uns
 
 ```sh
 pnpm exec tsx --test tests/clean-room.test.ts
-E2E_PRODUCTION=1 E2E_PORT=3108 pnpm test:e2e tests/e2e/clean-room*.spec.ts --workers=1
+E2E_PRODUCTION=1 E2E_PORT=3108 pnpm test:e2e 'clean-room.*\.spec\.ts'
 pnpm test
 pnpm typecheck
 pnpm build
 ```
 
 The E2E UI tests run all three real pipelines and then perform a new interaction in each rebuilt app. They do not stub the pipeline API or browser traffic.
+
+The `clean-room` Playwright project runs the desktop/mobile UI demos and admission
+test with one worker because they share the server's two-job pool. Other browser
+tests retain their configured parallelism. Use `--project=clean-room` to run just
+these shared-server cases; the pattern above also includes the independent pipeline
+and isolation tests.

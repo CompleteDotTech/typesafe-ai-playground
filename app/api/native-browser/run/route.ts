@@ -1,5 +1,5 @@
 import { readBoundedBody } from "../../../../lib/api";
-import { requireLocalBrowser } from "../../../../lib/localBrowser";
+import { requireBrowserRun } from "../../../../lib/localBrowser";
 import { executeNativeSession } from "../../../../lib/nativeBrowser/session";
 import { nativeMetrics } from "../../../../lib/nativeBrowser/protocol";
 export const runtime = "nodejs";
@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export const maxDuration = 300;
 export async function POST(request: Request) {
   try {
-    requireLocalBrowser(request);
+    requireBrowserRun(request);
     const input = JSON.parse(await readBoundedBody(request.body, 512));
     if (typeof input.id !== "string" || input.id.length > 100)
       throw Error("Native session ID required.");

@@ -10,7 +10,7 @@ import {
 import { resolveBrowserContext } from "../../../lib/browserTaskContext";
 import {
   getLocalBrowser,
-  requireLocalBrowser,
+  requireBrowserRun,
 } from "../../../lib/localBrowser";
 import {
   selectPcBuild,
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
   let goal: string, sessionId: string;
   let localOnly = false;
   try {
-    requireLocalBrowser(request);
+    requireBrowserRun(request);
     const input = JSON.parse(await readBoundedBody(request.body, 4096));
     goal = input.goal;
     sessionId = input.sessionId;

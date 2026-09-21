@@ -53,6 +53,22 @@ counter that resets on cold starts. They do not authenticate users or establish 
 global budget across IPs. Configure spending limits on your provider key for that.
 Local development does not pass through the Vercel Firewall.
 
+## Browser-run routes on your own server
+
+`/api/local-browser`, `/api/native-browser`, `/api/pc-build` and `/api/clean-room`
+launch Chromium on the server through `uv` (`browser-use` pinned in
+`lib/localBrowser.ts`). They accept same-origin requests from whichever host serves
+the app, so a self-hosted server with `uv` and Chromium can run the browser agent,
+native browser and clean-room workspaces. Requests whose `Origin` names another
+host, and `sec-fetch-site: cross-site` fetches, are refused; forwarded headers are
+ignored. The comparison is by host, not scheme, so a TLS-terminating proxy works.
+
+Vercel serverless functions cannot spawn Chromium, so those routes refuse with an
+explanation when `VERCEL` is set. On a self-hosted deployment the existing bounds
+still apply: three concurrent browser sessions, three starts per minute, and the
+shared-key controls above. Anyone who can reach the app can start a run, so put
+the deployment behind your own access control before exposing it publicly.
+
 `/api/meme-image` also restricts schemes, destinations, redirects, downloaded bytes,
 and decoded pixels. It resolves each destination, rejects private/reserved IPs,
 and pins the actual TLS connection to the validated address. No TypeSafe key or

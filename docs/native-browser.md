@@ -4,7 +4,7 @@ Open `/jev-browser-agent/native` on localhost. Jev chooses commands for an isola
 
 ## Run locally
 
-Use the repository's pinned pnpm version, `uv`, and Chromium. Set `TYPESAFE_API_KEY` in `.env.local` or use the API-key icon in the native toolbar, install Chromium with `pnpm exec playwright install chromium`, then run `pnpm dev`. `LOCAL_BROWSER_EXECUTABLE` can select another Chromium executable. The first session downloads pinned browser-use 0.13.10 through uv. Hosted deployments cannot launch a browser on your computer.
+Use the repository's pinned pnpm version, `uv`, and Chromium. Set `TYPESAFE_API_KEY` in `.env.local` or use the API-key icon in the native toolbar, install Chromium with `pnpm exec playwright install chromium`, then run `pnpm dev`. `LOCAL_BROWSER_EXECUTABLE` can select another Chromium executable. The first session downloads pinned browser-use 0.13.10 through uv. The browser launches on the server, so serverless hosts such as Vercel cannot run it; a self-hosted server with uv and Chromium can.
 
 The browser guide links to the native workspace. Choose one of these tasks:
 

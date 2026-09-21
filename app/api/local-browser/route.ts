@@ -3,13 +3,13 @@ import {
   createLocalBrowser,
   getLocalBrowser,
   closeLocalBrowser,
-  requireLocalBrowser,
+  requireBrowserRun,
 } from "../../../lib/localBrowser";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export async function POST(request: Request) {
   try {
-    requireLocalBrowser(request);
+    requireBrowserRun(request);
     const input = request.body
       ? JSON.parse(await readBoundedBody(request.body, 1024))
       : {};
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
 }
 export async function GET(request: Request) {
   try {
-    requireLocalBrowser(request);
+    requireBrowserRun(request);
     const session = getLocalBrowser(
       new URL(request.url).searchParams.get("id") || "",
     );
@@ -56,7 +56,7 @@ export async function GET(request: Request) {
 }
 export async function DELETE(request: Request) {
   try {
-    requireLocalBrowser(request);
+    requireBrowserRun(request);
     closeLocalBrowser(new URL(request.url).searchParams.get("id") || "");
     return Response.json({ closed: true });
   } catch (error) {

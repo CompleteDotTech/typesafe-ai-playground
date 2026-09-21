@@ -265,7 +265,7 @@ details[open] > summary:after {
   color: var(--muted);
 }
 .nav-label {
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 1.7px;
   font-weight: 600;
   color: var(--muted);
@@ -397,7 +397,7 @@ main {
   justify-content: space-between;
   padding: 12px 30px;
   color: var(--muted);
-  font-size: 9px;
+  font-size: 10px;
 }
 .footer-dot {
   margin: 0 7px;
@@ -418,7 +418,7 @@ main {
   flex-shrink: 0;
 }
 .eyebrow {
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--accent);
@@ -714,7 +714,7 @@ td {
   line-height: 1.5;
 }
 thead th {
-  font-size: 9px;
+  font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.7px;
   color: var(--muted);
@@ -731,7 +731,7 @@ td strong {
 td small {
   display: block;
   color: var(--muted);
-  font-size: 9px;
+  font-size: 10px;
   white-space: nowrap;
   margin-top: 5px;
 }
@@ -920,7 +920,7 @@ blockquote {
 }
 .rule-number {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 10px;
 }
 .rule-edit {
   padding: 14px;
@@ -1089,7 +1089,7 @@ blockquote {
 .composer-hint {
   display: flex;
   justify-content: space-between;
-  font-size: 9px;
+  font-size: 10px;
   color: var(--muted);
   margin-top: 10px;
 }
@@ -1144,7 +1144,7 @@ blockquote {
 }
 .example-item > span {
   display: block;
-  font-size: 8px;
+  font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.7px;
   color: var(--muted);
@@ -1161,7 +1161,7 @@ blockquote {
   margin-top: 6px;
 }
 .example-item small {
-  font-size: 8px;
+  font-size: 10px;
   display: inline-block;
   color: var(--accent);
   margin-top: 8px;
@@ -1225,7 +1225,7 @@ blockquote {
   align-items: center;
 }
 .type-badge {
-  font-size: 9px;
+  font-size: 10px;
   color: var(--accent);
   background: var(--accent-soft);
   border-radius: 4px;
@@ -1312,7 +1312,7 @@ blockquote {
   color: var(--accent);
 }
 .meme-scene span {
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--muted);
@@ -1508,7 +1508,7 @@ blockquote {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    font-size: 8px;
+    font-size: 10px;
     padding: 7px 5px;
     flex: 1;
     border: 0;
@@ -1532,11 +1532,11 @@ blockquote {
     padding: 0 14px;
   }
   .breadcrumb {
-    font-size: 9px;
+    font-size: 10px;
     gap: 7px;
   }
   .connection {
-    font-size: 9px;
+    font-size: 10px;
   }
   .header-actions {
     gap: 8px;
@@ -1557,7 +1557,7 @@ blockquote {
     max-width: 340px;
   }
   .eyebrow {
-    font-size: 8px;
+    font-size: 10px;
     margin-bottom: 8px;
   }
   .split {
@@ -1598,7 +1598,7 @@ blockquote {
   }
   .app-footer {
     padding: 9px 14px;
-    font-size: 8px;
+    font-size: 10px;
   }
   .app-footer > span:last-child {
     display: none;
@@ -1621,7 +1621,7 @@ blockquote {
     font-size: 25px;
   }
   .composer-hint {
-    font-size: 8px;
+    font-size: 10px;
   }
   .examples-layout {
     display: flex;
@@ -1760,7 +1760,7 @@ blockquote {
   border-radius: 9px;
 }
 .brand-sub {
-  font-size: 7px;
+  font-size: 8px;
 }
 .nav-label,
 .model-card {
@@ -2144,7 +2144,7 @@ select {
   }
   .sidebar nav a {
     flex-direction: column;
-    font-size: 9px;
+    font-size: 10px;
     padding: 7px 4px;
     gap: 4px;
   }
@@ -2166,7 +2166,7 @@ select {
     font-size: 12px;
   }
   .eyebrow {
-    font-size: 9px;
+    font-size: 10px;
   }
   .panel-heading {
     min-height: 62px;
@@ -4150,7 +4150,7 @@ main:has(> .compact-lab) {
     flex-direction: column;
   }
   .trace-heading .type-badge {
-    font-size: 9px;
+    font-size: 10px;
   }
 }
 .conversation-ranking {
@@ -4235,7 +4235,7 @@ main:has(> .compact-lab) {
 }
 .winner-score > span {
   display: block;
-  font-size: 9px;
+  font-size: 10px;
 }
 .featured-message {
   position: relative;
@@ -4362,7 +4362,7 @@ main:has(> .compact-lab) {
 }
 .ranked-score > span {
   display: block;
-  font-size: 9px;
+  font-size: 10px;
   color: var(--muted);
   margin-top: 3px;
 }
@@ -4742,7 +4742,7 @@ main:has(> .compact-lab) {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 3px;
-  font-size: 8px;
+  font-size: 10px;
   text-align: center;
   color: var(--muted);
 }
@@ -4775,7 +4775,7 @@ main:has(> .compact-lab) {
   border-radius: 6px;
 }
 .guide-example > span {
-  font-size: 9px;
+  font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--muted);
@@ -5152,7 +5152,7 @@ td time {
   padding: 13px;
 }
 .scoreboard dt {
-  font-size: 9px;
+  font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.7px;
   color: var(--muted);
@@ -5513,7 +5513,7 @@ button.chess-square:focus-visible {
   border-radius: 4px;
   background: var(--accent-soft);
   color: var(--accent);
-  font-size: 9px;
+  font-size: 10px;
   vertical-align: middle;
 }
 .tag.best-tag {

@@ -414,8 +414,8 @@ export function NativeBrowserLab() {
         )}
         <div className="native-composer-actions">
           <p>
-            Run on localhost with uv, Chromium and a TypeSafe key. Provider
-            limits pause the native loop.
+            Needs uv, Chromium and a TypeSafe key on the server running this
+            app. Provider limits pause the native loop.
           </p>
           {busy ? (
             <button type="button" className="button" onClick={stop}>

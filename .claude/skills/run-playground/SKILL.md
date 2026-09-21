@@ -146,8 +146,8 @@ to run it rather than trying to do it for them.
 `/jev-browser-agent` and its `/native` route spawn a local `browser-use`
 session through `uv`, pinned to `browser-use==0.13.10`, and drive real
 Chromium. They need `uv` on PATH and the Playwright Chromium download. These
-routes only work on localhost — a hosted deployment cannot launch a browser on
-your machine.
+routes accept same-origin requests from any host, but the browser launches on
+the server, so a serverless host such as Vercel cannot run them.
 
 ## Running the Playwright suite instead
 
