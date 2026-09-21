@@ -37,9 +37,13 @@ test("native run and observation require an existing bound session", async () =>
     GET(new Request("http://localhost/api/native-browser?id=missing")).status,
     400,
   );
+  // Closing a missing session is idempotent; a cross-site close is refused.
   assert.equal(
-    DELETE(new Request("https://example.test/api/native-browser?id=missing"))
-      .status,
+    DELETE(
+      new Request("http://localhost/api/native-browser?id=missing", {
+        headers: { origin: "https://evil.example" },
+      }),
+    ).status,
     400,
   );
 });

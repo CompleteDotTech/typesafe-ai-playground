@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { readBoundedBody } from "../../../lib/api";
-import { requireLocalRebuild } from "../../../src/clean-room/local-only";
+import { requireRebuildOrigin } from "../../../src/clean-room/same-origin";
 import {
   artifact,
   getDemoJob,
@@ -21,7 +21,7 @@ const startSchema = z.object({
 });
 export async function POST(request: Request) {
   try {
-    requireLocalRebuild(request);
+    requireRebuildOrigin(request);
     const input = startSchema.parse(
       JSON.parse(await readBoundedBody(request.body, 2048)),
     );
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
 }
 export async function GET(request: Request) {
   try {
-    requireLocalRebuild(request);
+    requireRebuildOrigin(request);
     const params = new URL(request.url).searchParams;
     const id = params.get("id") || "";
     if (params.has("artifact")) {
@@ -65,7 +65,7 @@ export async function GET(request: Request) {
 }
 export async function DELETE(request: Request) {
   try {
-    requireLocalRebuild(request);
+    requireRebuildOrigin(request);
     const job = getDemoJob(new URL(request.url).searchParams.get("id") || "");
     if (job.status === "running")
       throw Error("Wait for verification to finish before closing this run.");

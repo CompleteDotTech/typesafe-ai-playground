@@ -1,6 +1,6 @@
 import { readBoundedBody } from "../../../lib/api";
 import {
-  requireLocalBrowser,
+  requireBrowserRun,
   getLocalBrowser,
 } from "../../../lib/localBrowser";
 import {
@@ -13,7 +13,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export async function POST(request: Request) {
   try {
-    requireLocalBrowser(request);
+    requireBrowserRun(request);
     const input = JSON.parse(await readBoundedBody(request.body, 8192));
     const session = createNativeSession(input, new URL(request.url).origin);
     return Response.json(
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
 }
 export function GET(request: Request) {
   try {
-    requireLocalBrowser(request);
+    requireBrowserRun(request);
     const id = new URL(request.url).searchParams.get("id") ?? "",
       session = getNativeSession(id),
       browser = getLocalBrowser(id);
@@ -64,7 +64,7 @@ export function GET(request: Request) {
 }
 export function DELETE(request: Request) {
   try {
-    requireLocalBrowser(request);
+    requireBrowserRun(request);
     closeNativeSession(new URL(request.url).searchParams.get("id") ?? "");
     return Response.json({ closed: true });
   } catch (error) {

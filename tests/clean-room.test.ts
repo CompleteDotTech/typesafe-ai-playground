@@ -353,26 +353,34 @@ test("live component emission needs no model, credentials, network, or call budg
   assert.equal(Object.hasOwn(liveAdapters(), "generate"), false);
 });
 
-test("local API accepts Next canonical URLs while checking the actual loopback Host and Origin", async () => {
-  const { requireLocalRebuild } = await import("../src/clean-room/local-only");
+test("rebuild API accepts same-origin requests on any Host and refuses another Origin", async () => {
+  const { requireRebuildOrigin } =
+    await import("../src/clean-room/same-origin");
   assert.doesNotThrow(() =>
-    requireLocalRebuild(
+    requireRebuildOrigin(
       new Request("http://localhost:3108/api/clean-room", {
         headers: { host: "127.0.0.1:3108", origin: "http://127.0.0.1:3108" },
       }),
     ),
   );
   assert.throws(() =>
-    requireLocalRebuild(
+    requireRebuildOrigin(
       new Request("http://localhost:3108/api/clean-room", {
         headers: { host: "127.0.0.1:3108", origin: "https://evil.test" },
       }),
     ),
   );
-  assert.throws(() =>
-    requireLocalRebuild(
+  assert.doesNotThrow(() =>
+    requireRebuildOrigin(
       new Request("http://localhost:3108/api/clean-room", {
-        headers: { host: "evil.test", origin: "http://evil.test" },
+        headers: { host: "rebuild.example", origin: "https://rebuild.example" },
+      }),
+    ),
+  );
+  assert.throws(() =>
+    requireRebuildOrigin(
+      new Request("http://localhost:3108/api/clean-room", {
+        headers: { host: "rebuild.example", origin: "http://evil.test" },
       }),
     ),
   );

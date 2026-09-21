@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   validateNeweggBrowserUrl,
-  requireLocalBrowser,
+  requireBrowserRun,
 } from "../lib/localBrowser";
 test("local browser accepts observed Newegg product slugs and listing URLs only", () => {
   for (const url of [
@@ -20,19 +20,26 @@ test("local browser accepts observed Newegg product slugs and listing URLs only"
   ])
     assert.throws(() => validateNeweggBrowserUrl(url));
 });
-test("local browser refuses hosted and cross-origin access", () => {
-  assert.throws(() =>
-    requireLocalBrowser(new Request("https://example.com/api/local-browser")),
+test("browser runs accept same-origin requests from any host and refuse cross-origin", () => {
+  assert.doesNotThrow(() =>
+    requireBrowserRun(
+      new Request("https://example.com/api/local-browser", {
+        headers: { host: "example.com", origin: "https://example.com" },
+      }),
+    ),
+  );
+  assert.doesNotThrow(() =>
+    requireBrowserRun(new Request("https://example.com/api/local-browser")),
   );
   assert.throws(() =>
-    requireLocalBrowser(
+    requireBrowserRun(
       new Request("http://localhost/api/local-browser", {
         headers: { origin: "https://evil.example" },
       }),
     ),
   );
   assert.doesNotThrow(() =>
-    requireLocalBrowser(
+    requireBrowserRun(
       new Request("http://localhost/api/local-browser", {
         headers: { origin: "http://localhost" },
       }),
@@ -40,11 +47,11 @@ test("local browser refuses hosted and cross-origin access", () => {
   );
 });
 
-test("local browser validates the actual loopback Host when Next canonicalizes the URL", () => {
+test("browser runs validate the actual Host when Next canonicalizes the URL", () => {
   for (const host of ["localhost:3121", "127.0.0.1:3121", "[::1]:3121"]) {
     assert.doesNotThrow(
       () =>
-        requireLocalBrowser(
+        requireBrowserRun(
           new Request("http://localhost:3121/api/local-browser", {
             headers: {
               host,
@@ -56,18 +63,27 @@ test("local browser validates the actual loopback Host when Next canonicalizes t
       host,
     );
   }
+  // A TLS-terminating proxy changes the scheme but not the host.
+  assert.doesNotThrow(() =>
+    requireBrowserRun(
+      new Request("http://playground.example/api/local-browser", {
+        headers: {
+          host: "playground.example",
+          origin: "https://playground.example",
+        },
+      }),
+    ),
+  );
 });
 
-test("local browser does not trust public Hosts, forwarded hosts, or another origin", () => {
+test("browser runs refuse another Origin, cross-site fetches, and malformed Hosts", () => {
   for (const headers of [
-    { host: "public.example", origin: "http://public.example" },
-    { host: "public.example" },
     { host: "127.0.0.1:3121", origin: "http://127.0.0.1:3000" },
     { host: "127.0.0.1:3121", origin: "http://localhost:3121" },
     { host: "127.0.0.1:3121", origin: "https://evil.example" },
     { host: "127.0.0.1:3121", origin: "null" },
     { host: "127.0.0.1:3121", "sec-fetch-site": "cross-site" },
-    { host: "public.example", "x-forwarded-host": "localhost:3121" },
+    { host: "public.example", origin: "https://evil.example" },
     {
       host: "127.0.0.1:3121",
       origin: "http://localhost:3121",
@@ -76,33 +92,45 @@ test("local browser does not trust public Hosts, forwarded hosts, or another ori
     { host: "localhost:3121/path" },
     { host: "user@localhost:3121" },
   ]) {
-    assert.throws(() =>
-      requireLocalBrowser(
-        new Request("http://localhost:3121/api/local-browser", {
-          headers: headers as Record<string, string>,
-        }),
-      ),
+    assert.throws(
+      () =>
+        requireBrowserRun(
+          new Request("http://localhost:3121/api/local-browser", {
+            headers: headers as Record<string, string>,
+          }),
+        ),
+      JSON.stringify(headers),
     );
   }
-  assert.throws(() =>
-    requireLocalBrowser(
-      new Request("https://public.example/api/local-browser", {
-        headers: { host: "localhost", origin: "https://localhost" },
+  // Forwarded headers are ignored, never trusted: the real Host decides.
+  assert.doesNotThrow(() =>
+    requireBrowserRun(
+      new Request("http://public.example/api/local-browser", {
+        headers: {
+          host: "public.example",
+          origin: "http://public.example",
+          "x-forwarded-host": "localhost:3121",
+        },
       }),
     ),
   );
 });
 
-test("hosted execution remains unavailable even with loopback request headers", () => {
+test("Vercel serverless refuses browser runs with an explanation", () => {
   const previous = process.env.VERCEL;
   try {
     process.env.VERCEL = "1";
-    assert.throws(() =>
-      requireLocalBrowser(
-        new Request("http://localhost:3121/api/local-browser", {
-          headers: { host: "127.0.0.1:3121", origin: "http://127.0.0.1:3121" },
-        }),
-      ),
+    assert.throws(
+      () =>
+        requireBrowserRun(
+          new Request("http://localhost:3121/api/local-browser", {
+            headers: {
+              host: "127.0.0.1:3121",
+              origin: "http://127.0.0.1:3121",
+            },
+          }),
+        ),
+      /Vercel serverless functions cannot/,
     );
   } finally {
     if (previous === undefined) delete process.env.VERCEL;

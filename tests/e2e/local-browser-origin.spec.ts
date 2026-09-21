@@ -32,7 +32,5 @@ test("the real Next server refuses cross-origin browser access", async ({
     },
   );
   expect(response.status()).toBe(400);
-  expect((await response.json()).error).toContain(
-    "only from this app running on localhost",
-  );
+  expect((await response.json()).error).toContain("same origin");
 });

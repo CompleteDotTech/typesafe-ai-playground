@@ -52,8 +52,9 @@ export function BrowserAgentGuide() {
           <div>
             <dt>Run locally</dt>
             <dd>
-              Open the app on localhost with <code>uv</code> installed. Hosted
-              deployments cannot launch your computer’s browser.
+              Run the app on a machine with <code>uv</code> and Chromium
+              installed. The browser launches on that server, so serverless
+              hosts such as Vercel cannot run it.
             </dd>
           </div>
           <div>
