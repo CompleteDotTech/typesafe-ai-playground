@@ -10,6 +10,7 @@ const production = !!process.env.CI || process.env.E2E_PRODUCTION === "1";
  * switch meant to reproduce CI locally was the one combination that could not.
  */
 const softwareGl = !!process.env.CI || !!process.env.E2E_SOFTWARE_GL;
+const sharedDemoTests = /clean-room(?:-jobs)?\.spec\.ts$/;
 export default defineConfig({
   testDir: "./tests/e2e",
   // Aborts the run when the port is served by another checkout. See the file.
@@ -36,10 +37,23 @@ export default defineConfig({
     },
   },
   projects: [
-    { name: "desktop", use: { ...devices["Desktop Chrome"] } },
+    {
+      name: "desktop",
+      testIgnore: sharedDemoTests,
+      use: { ...devices["Desktop Chrome"] },
+    },
     {
       name: "mobile",
+      testIgnore: sharedDemoTests,
       use: { ...devices["iPhone 13"], defaultBrowserType: "chromium" },
+    },
+    {
+      // These tests share the server's two-slot job pool. The admission test
+      // needs both slots, so UI and admission cases must not overlap.
+      name: "clean-room",
+      testMatch: sharedDemoTests,
+      workers: 1,
+      use: { ...devices["Desktop Chrome"] },
     },
   ],
   webServer: {
