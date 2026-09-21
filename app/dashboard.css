@@ -79,7 +79,7 @@ body {
 }
 .dashboard-shell .brand-sub {
   display: block;
-  font-size: 7px;
+  font-size: 8px;
   color: var(--muted);
   letter-spacing: 0.08em;
 }
@@ -87,7 +87,7 @@ body {
   margin: 8px 0 0;
   display: block;
   padding: 0 10px;
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.1em;
   color: var(--muted);
 }
@@ -367,7 +367,7 @@ body {
   border-bottom: 1px solid var(--line);
 }
 .usage-dialog-head .eyebrow {
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.12em;
   color: var(--muted);
 }
@@ -691,7 +691,7 @@ body {
   .usage-badge small {
     display: inline;
     padding-left: 4px;
-    font-size: 9px;
+    font-size: 10px;
   }
   .workspace-breadcrumb strong {
     max-width: none;
@@ -711,7 +711,7 @@ body {
 }
 .dashboard-shell .nav-group .nav-label {
   margin: 15px 0 5px;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.075em;
   text-transform: uppercase;
@@ -737,7 +737,7 @@ body {
 }
 .home-eyebrow {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.14em;
   margin: 0 0 16px;
@@ -974,7 +974,7 @@ body {
 .home-card-ord {
   margin-right: auto;
   font:
-    9px/1 ui-monospace,
+    10px/1 ui-monospace,
     monospace;
   letter-spacing: 0.14em;
   color: var(--muted);
@@ -1021,7 +1021,7 @@ body {
 }
 .home-card-flow dt {
   font:
-    9px/1.6 ui-monospace,
+    10px/1.6 ui-monospace,
     monospace;
   letter-spacing: 0.14em;
   text-transform: uppercase;

@@ -1,0 +1,183 @@
+/* Cross-cutting responsive and accessibility polish. Layered after the shell
+   and workspace sheets so it can adjust their breakpoints without restating
+   them. Each block names the behaviour it guarantees. */
+
+/* Tablet widths (761–1100px) narrow the rail to icons. Two-panel workspaces
+   keep a usable column instead of splitting ~540px between a 224px rail and
+   two or three panels. The rail is never hidden; labels return as tooltips. */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .dashboard-shell.app-shell {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+  .dashboard-shell .sidebar {
+    padding-inline: 9px;
+  }
+  .dashboard-shell .sidebar-title-row {
+    justify-content: center;
+  }
+  .dashboard-shell.app-shell .sidebar-title-row .brand {
+    display: flex;
+    padding: 0;
+  }
+  .dashboard-shell .sidebar .brand > span:not(.brand-mark),
+  .dashboard-shell .sidebar nav a span,
+  .dashboard-shell .nav-label,
+  .dashboard-shell .sidebar-bottom,
+  .dashboard-shell .sidebar-toggle {
+    display: none;
+  }
+  .dashboard-shell .sidebar nav a {
+    justify-content: center;
+    padding: 10px;
+  }
+  .dashboard-shell .nav-group {
+    border-top: 1px solid var(--line);
+    padding-top: 8px;
+    margin-top: 5px;
+  }
+}
+
+/* The example builder stacks its library above the experiment between the
+   phone and desktop layouts, mirroring the phone layout: a horizontal strip
+   of examples rather than a third column squeezed beside the editor. */
+@media (min-width: 651px) and (max-width: 960px) {
+  .examples-layout,
+  .examples-layout.results-collapsed,
+  .examples-layout.library-collapsed {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    gap: 16px;
+    padding-bottom: 15px;
+  }
+  .library-panel {
+    height: 300px;
+    flex: none;
+  }
+  .example-list {
+    display: flex;
+    gap: 7px;
+    overflow: auto;
+  }
+  .example-item {
+    min-width: 230px;
+    margin: 0 0 8px;
+  }
+  .library-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 10px;
+  }
+  .library-filters > * {
+    width: 100%;
+    margin: 0;
+  }
+  .library-toggle {
+    display: none;
+  }
+  .library-collapsed .library-panel > :not(.library-toggle) {
+    display: revert;
+  }
+  .experiment-panel,
+  .example-results {
+    min-height: 420px;
+    flex: none;
+  }
+  .examples-layout.results-collapsed .example-results {
+    min-height: 52px;
+  }
+  .results-collapsed .results-toggle {
+    writing-mode: horizontal-tb;
+    min-height: 52px;
+    justify-content: space-between;
+  }
+  .results-collapsed .results-toggle .count {
+    margin: 0;
+    padding: 5px 8px;
+  }
+}
+
+/* Pointer targets meet the 24px minimum (WCAG 2.5.8) without changing how
+   the text reads: the padding grows, the type does not. */
+.rank-id,
+.link-button {
+  min-height: 24px;
+}
+.rank-id {
+  display: inline-flex;
+  align-items: center;
+}
+.json-caret {
+  min-width: 24px;
+  min-height: 24px;
+  justify-content: center;
+  margin-left: -20px;
+  border-radius: 4px;
+}
+.dashboard-shell .docs-link,
+.home-note a {
+  min-height: 28px;
+  align-items: center;
+}
+.jc-rail-note button,
+.jc-back {
+  min-height: 28px;
+}
+input[type="range"] {
+  min-height: 24px;
+  cursor: pointer;
+}
+
+/* Consecutive form groups keep the same rhythm as labelled fields. */
+.panel-content > fieldset + fieldset,
+.panel-content > fieldset + label {
+  margin-top: 16px;
+}
+.panel-content > label + h3 {
+  margin-top: 14px;
+}
+
+/* Phones zoom the page when a focused field is set below 16px. Keeping form
+   text at 16px on coarse pointers avoids the zoom and the horizontal scroll
+   it leaves behind. */
+@media (max-width: 760px) and (pointer: coarse) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,
+  textarea {
+    font-size: max(16px, 1em);
+  }
+}
+
+/* On phones the playbook shows in full instead of scrolling inside a 220px
+   box that clips its own heading; the page itself scrolls there. */
+@media (max-width: 650px) {
+  .workflow-layout > .rules-panel {
+    max-height: none;
+  }
+  .workflow-layout > .rules-panel .scroll {
+    overflow: visible;
+  }
+}
+
+/* The example builder's draft controls wrap from the left on phones, so the
+   guide, the draft state and the reset button read as one row of actions. */
+@media (max-width: 650px) {
+  .dashboard-shell .setup-draft-actions {
+    justify-content: flex-start;
+  }
+}
+
+/* Touch browsers skip the double-tap zoom delay on controls. */
+button,
+.button,
+a,
+summary,
+input,
+select,
+textarea,
+[role="button"] {
+  touch-action: manipulation;
+}

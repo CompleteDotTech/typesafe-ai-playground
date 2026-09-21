@@ -4,6 +4,7 @@ import "./globals.css";
 import "./brand.css";
 import "./dashboard.css";
 import "./workspace.css";
+import "./polish.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://typesafe-ai-playground.vercel.app"),
   title: "TypeSafe · Playground",

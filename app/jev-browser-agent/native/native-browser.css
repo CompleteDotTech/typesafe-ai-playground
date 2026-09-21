@@ -264,3 +264,17 @@ body:has(.native-browser-studio) main {
     flex-direction: column;
   }
 }
+
+/* Toolbar and inspector controls meet the 24px minimum pointer target. */
+.native-toolbar > a,
+.native-toolbar .icon-button {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.native-inspector summary {
+  padding: 6px 0;
+}
