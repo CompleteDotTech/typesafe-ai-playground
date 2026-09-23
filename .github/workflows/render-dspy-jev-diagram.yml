@@ -1,0 +1,57 @@
+name: Render DSPy Jev Mermaid
+
+on:
+  push:
+    branches:
+      - example/dspy-jev-optimizer
+    paths:
+      - "examples/dspy-jev-optimizer/architecture.mmd"
+      - ".github/workflows/render-dspy-jev-diagram.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Render Mermaid SVG
+        run: |
+          npx -y -p @mermaid-js/mermaid-cli@11.17.0 mmdc \
+            -p examples/dspy-jev-optimizer/puppeteer-config.json \
+            -i examples/dspy-jev-optimizer/architecture.mmd \
+            -o examples/dspy-jev-optimizer/architecture.svg \
+            -b '#0B1020'
+
+      - name: Render high-resolution Mermaid PNG
+        run: |
+          npx -y -p @mermaid-js/mermaid-cli@11.17.0 mmdc \
+            -p examples/dspy-jev-optimizer/puppeteer-config.json \
+            -i examples/dspy-jev-optimizer/architecture.mmd \
+            -o examples/dspy-jev-optimizer/architecture-hd.png \
+            -b '#0B1020' \
+            -w 3200 \
+            -s 2
+
+      - name: Commit rendered assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add examples/dspy-jev-optimizer/architecture.svg examples/dspy-jev-optimizer/architecture-hd.png
+          if git diff --cached --quiet; then
+            echo "Rendered assets are already current."
+          else
+            git commit -m "docs: render DSPy Jev Mermaid [skip ci]"
+            git push
+          fi
